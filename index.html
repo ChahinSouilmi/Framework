@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restaurant</title>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #div_resume {
+            background-color: #6699FF;
+            border: 2px solid;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="bg"></div>
+        <h3>Mohamed chahin souilmi</h3>
+        <h1>Commandez votre table </h1>
+        <p>Ce formulaire permet de commander une table dans notre restaurant, ensuite vous pouvez commande vos plats. Il faudra aussi indiquer vos coordonn&eacute;es et dans le cas de plusieurs personne, indiquer le nom de chacun d'entre eux.</p>
+        <form id="form1" name="form1" method="post" action="">
+            Table pour combien de personnes ?
+            <select name="nbp" id="nbp">
+                <option value="-1" >--Veuillez choisir---</option>
+                <option value="1">Une place</option>
+                <option value="2">Deux places</option>
+                <option value="4">4 places</option>
+                <option value="6">6 places</option>
+              </select>
+
+            <br />
+            <div id="chaises">
+
+            </div>
+            <br />
+            <br /> A quelle date vous allez venir ?
+            <input name="date" type="date" id="date" />
+            <br />
+            <hr/>
+            <h2>Vos coordon&eacute;es</h2>
+            Civilit&eacute; :
+            <input name="civilite" type="radio" value="Madamme" /> Madamme
+            <input name="civilite" type="radio" value="Mademoiselle" /> Mademoiselle
+            <input name="civilite" type="radio" value="Monsieur" /> Monsieur
+            <br /> Nom et pr&eacute;nom :
+            <input name="nom" type="text" id="nom" size="60" />
+
+            <br /> N&deg; de t&eacute;l&eacute;phone :
+            <input name="tel" type="number" id="tel" />
+            <br />
+            <div id="div_accompagnateurs">Liste des accompagnateurs (une personne par ligne):
+                <br />
+                <textarea name="accompagnateurs" cols="60" rows="4" id="accompagnateurs"></textarea>
+                <br />
+            </div>
+            <hr />
+            <h2>Que voulez-vous manger ? </h2>
+            <div class="checkbox"><label>
+<input name="cmd" type="checkbox" value="Salade" data-prix="5" />
+Salade</label></div>
+            <div class="checkbox"><label> 
+<input name="cmd" type="checkbox" value="Soupe" data-prix="2.5" />
+Soupe </label></div>
+
+            <div class="checkbox"><label>
+<input name="cmd" type="checkbox" value="Couscous" data-prix="15.5" />
+Couscous</label></div>
+
+            <div class="checkbox"><label>
+<input name="cmd" type="checkbox" value="Riz" data-prix="12" />
+Riz</label></div>
+
+            <div class="checkbox"><label>
+<input name="cmd" type="checkbox" value="Fruits" data-prix="7" />
+Fruits </label></div>
+            <div class="checkbox"><label> 
+<input name="cmd" type="checkbox" value="Gateaux" data-prix="6.4" />
+Gateaux</label></div>
+            <hr />
+
+            <br />
+            <input name="b1" type="button" id="b1" value="Valider ma commande" />
+            <br />
+            <br />
+
+            <div id="div_resume">
+                Afficher le r&eacute;sum&eacute; ici ...
+            </div>
+            <p>&nbsp;</p>
+        </form>
+
+    </div>
+
+</body>
+
+<!-- Les code Javascript CI-DESSOUS uniquement -->
+<script>
+    $(document).ready(function() {
+
+        //-------------------------------------CHANGE IMAGE---------------------------------------//
+        $("select").change(function() {
+            var x = document.getElementById("nbp").value
+
+            switch (x) {
+                case "1":
+                    document.getElementById("chaises").innerHTML = "<img src='img/1.jpg'>";
+                    break;
+                case "2":
+                    document.getElementById("chaises").innerHTML = "<img src='img/2.jpg'>";
+                    break;
+                case "4":
+                    document.getElementById("chaises").innerHTML = "<img src='img/4.jpg'>";
+                    break;
+                case "6":
+                    document.getElementById("chaises").innerHTML = "<img src='img/6.jpg'>";
+                    break;
+
+                default:
+                    document.getElementById("chaises").innerHTML = "<b>Choisir le nombre des places</b>";
+                    break;
+            }
+
+        });
+        //-------------------------------------VALIDATION DU FORM---------------------------------------//
+        $("#b1").click(function() {
+            if ($("#nbp").val() == '-1') {
+                alert("Veuillez sélectionner le nombre des places");
+                $('#nbp').focus();
+            } else
+            if ($("#date").val() == "") {
+                alert("saisir la date SVP");
+                $('#date').focus();
+
+
+            } else
+                var x = $("input[name='civilite']:checked").val();
+            if (x == null) {
+                alert("La civilite est obligatoire");
+
+            } else
+            if ($("#nom").val() == " ") {
+                alert("Nom est prénom trop courts !");
+                $('#nom').focus();
+
+            } else
+            if ((isNaN($("#tel").val()) == true) || ($("#tel").val().length < 8) || ($("#tel").val().length > 8 || $("#tel").val() < 0)) {
+                alert("N° de tel invalide !!");
+                $('#tel').focus();
+
+            } else
+                var y = $("input[name='cmd']:checked").val();
+            if (y == null) {
+                alert("Choisir les plats");
+            } else {
+                var prix = 0;
+                var cmd = [];
+                var cmd1 = "";
+                $.each($("input[name='cmd']:checked"), function() {
+                    cmd.push($(this).val());
+                    prix += Number($(this).attr("data-prix"));
+                });
+                for (i = 0; i < cmd.length; i++) {
+                    cmd1 += "<li>" + cmd[i] + "</li>";
+                }
+                //-------------------------------------AFFICHAGE DES INFORMATIONS---------------------------------------//
+                $("#div_resume").html("Bonjour " + x + " " + $("#nom").val() + "<br/>" + "Votre commande du " + $("#date").val() + " a bien été validée." + "<br/>" + " Les plats commandés sont :" + "<ul>" + cmd1 + "</ul>" + "le montant total de la commande est de " + prix + "Dinars");
+            }
+        });
+
+    });
+</script>
+
+</html>
